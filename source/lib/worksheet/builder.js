@@ -397,6 +397,8 @@ let _addPageSetup = (promiseObj) => {
             o.horizontalDpi !== null ? psEle.att('horizontalDpi', o.horizontalDpi) : null;
             o.verticalDpi !== null ? psEle.att('verticalDpi', o.verticalDpi) : null;
             o.copies !== null ? psEle.att('copies', o.copies) : null;
+            o.printTitleColumns !== null ? psEle.att('printTitleColumns', o.printTitleColumns) : null;
+            o.printTitleRows !== null ? psEle.att('printTitleRows', o.printTitleRows) : null;
             psEle.up();
         }
 
