@@ -44,7 +44,10 @@ module.exports = {
         'scale': null,
         'useFirstPageNumber': null,
         'usePrinterDefaults': null,
-        'verticalDpi': null
+        'verticalDpi': null,
+        'printTitleColumns': null,
+        'printTitleRows': null
+        
     },
     'sheetView': {
         'pane': {
