@@ -69,7 +69,9 @@ test('Set WorkSheet options', (t) => {
             'scale': 100,
             'useFirstPageNumber': true,
             'usePrinterDefaults': true,
-            'verticalDpi': 96
+            'verticalDpi': 96,
+            'printTitleColumns': '$A$1:A$65536',
+            'printTitleRows': '$A$1:$IV$1'
         },
         'sheetView': {
             'pane': { // Note. Calling .freeze() on a row or column will adjust these values 
