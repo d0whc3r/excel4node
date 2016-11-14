@@ -60,6 +60,8 @@ class Worksheet {
      * @param {Boolean} opts.pageSetup.useFirstPageNumber
      * @param {Boolean} opts.pageSetup.usePrinterDefaults
      * @param {Number} opts.pageSetup.verticalDpi 
+     * @param {String} opts.pageSetup.printTitleColumns
+     * @param {String} opts.pageSetup.printTitleRows
      * @param {Object} opts.sheetView 
      * @param {Object} opts.sheetView.pane 
      * @param {String} opts.sheetView.pane.activePane one of 'bottomLeft', 'bottomRight', 'topLeft', 'topRight'
