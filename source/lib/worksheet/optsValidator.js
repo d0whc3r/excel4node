@@ -34,7 +34,9 @@ const optsTypes = {
         'scale': 'Integer',
         'useFirstPageNumber': 'Boolean',
         'usePrinterDefaults': 'Boolean',
-        'verticalDpi': 'Integer'
+        'verticalDpi': 'Integer',
+        'printTitleColumns': 'String',
+        'printTitleRows': 'String'
     },
     'headerFooter': {
         'evenFooter': 'String',
