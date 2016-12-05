@@ -1,20 +1,22 @@
 # excel4node
+
 A full featured xlsx file generation library allowing for the creation of advanced Excel files.
 
-excel4node conforms to the ECMA-376 OOXML specification 2nd edition   
+excel4node conforms to the ECMA-376 OOXML specification 2nd edition
 
-REFERENCES   
-[OpenXML White Paper](http://www.ecma-international.org/news/TC45_current_work/OpenXML%20White%20Paper.pdf)   
-[ECMA-376 Website](http://www.ecma-international.org/publications/standards/Ecma-376.htm)   
-[OpenOffice Excel File Format Reference](http://www.openoffice.org/sc/excelfileformat.pdf)   
-[OpenOffice Anatomy of OOXML explanation](http://officeopenxml.com/anatomyofOOXML-xlsx.php)   
-[MS-XSLX spec (pdf)] (http://download.microsoft.com/download/D/3/3/D334A189-E51B-47FF-B0E8-C0479AFB0E3C/%5BMS-XLSX%5D.pdf)    
+REFERENCES<br>
+[OpenXML White Paper](http://www.ecma-international.org/news/TC45_current_work/OpenXML%20White%20Paper.pdf)<br>
+[ECMA-376 Website](http://www.ecma-international.org/publications/standards/Ecma-376.htm)<br>
+[OpenOffice Excel File Format Reference](http://www.openoffice.org/sc/excelfileformat.pdf)<br>
+[OpenOffice Anatomy of OOXML explanation](http://officeopenxml.com/anatomyofOOXML-xlsx.php)<br>
+[MS-XSLX spec (pdf)] (<http://download.microsoft.com/download/D/3/3/D334A189-E51B-47FF-B0E8-C0479AFB0E3C/%5BMS-XLSX%5D.pdf>)
 
-Code references specifications sections from ECMA-376 2nd edition doc   
-ECMA-376, Second Edition, Part 1 - Fundamentals And Markup Language Reference.pdf   
-found in ECMA-376 2nd edition Part 1 download at [http://www.ecma-international.org/publications/standards/Ecma-376.htm](http://www.ecma-international.org/publications/standards/Ecma-376.htm)   
+Code references specifications sections from ECMA-376 2nd edition doc<br>
+ECMA-376, Second Edition, Part 1 - Fundamentals And Markup Language Reference.pdf<br>
+found in ECMA-376 2nd edition Part 1 download at <http://www.ecma-international.org/publications/standards/Ecma-376.htm>
 
-### Basic Usage
+## Basic Usage
+
 ```javascript
 // Require library
 var xl = require('excel4node');
@@ -28,11 +30,11 @@ var ws2 = wb.addWorksheet('Sheet 2');
 
 // Create a reusable style
 var style = wb.createStyle({
-	font: {
-		color: '#FF0800',
-		size: 12
-	},
-	numberFormat: '$#,##0.00; ($#,##0.00); -'
+    font: {
+        color: '#FF0800',
+        size: 12
+    },
+    numberFormat: '$#,##0.00; ($#,##0.00); -'
 });
 
 // Set value of cell A1 to 100 as a number type styled with paramaters of style
@@ -52,37 +54,39 @@ ws.cell(3,1).bool(true).style(style).style({font: {size: 14}});
 
 wb.write('Excel.xlsx');
 ```
+
 ## excelnode
+
 excel4node comes with some generic functions and types
 
-xl.getExcelRowCol(cellRef)   
+xl.getExcelRowCol(cellRef)<br>
 Accepts cell reference (i.e. 'A1') and returns object with corresponding row and column
 
-```javascript 
+```javascript
 xl.getExcelRowCol('B5');
-// returns { row: 5, col: 2} 
+// returns { row: 5, col: 2}
 ```
 
-xl.getExcelAlpha(column)   
+xl.getExcelAlpha(column)<br>
 Accepts column as integer and returns corresponding column reference as alpha
 
-```javascript 
+```javascript
 xl.getExcelAlpha(10);
 // returns 'J'
 ```
 
-xl.getExcelCellRef(row, column)   
+xl.getExcelCellRef(row, column)<br>
 Accepts row and column as integers and returns Excel cell reference
 
-```javascript 
+```javascript
 xl.getExcelCellRef(5, 3);
 // returns 'C5'
 ```
 
-xl.getExcelTS(date)   
+xl.getExcelTS(date)<br>
 Accepts Date object and returns an Excel timestamp
 
-```javascript 
+```javascript
 var newDate = new Date('2015-01-01T00:00:00.0000Z');
 xl.getExcelTS(newDate);
 // Returns 42004.791666666664
@@ -90,11 +94,12 @@ xl.getExcelTS(newDate);
 
 xl.PAPER_SIZE
 
-
 ## Workbook
+
 An instance of the Workbook class contains all data and parameters for the Excel Workbook.
 
-#### Constructor
+### Constructor
+
 WorkBook constructor accepts a configuration object.
 
 ```javascript
@@ -112,22 +117,22 @@ var wb = new xl.Workbook({
 });
 ```
 
-#### Methods   
-wb.addWorksheet(name, options);   
-Adds a new WorkSheet to the WorkBook   
-Accepts name of new WorkSheet and options object (see WorkSheet section)   
+### Methods
+
+wb.addWorksheet(name, options);<br>
+Adds a new WorkSheet to the WorkBook<br>
+Accepts name of new WorkSheet and options object (see WorkSheet section)<br>
 Returns a WorkSheet instance
 
-wb.setSelectedTab(id);   
-Sets which tab will be selected when the WorkBook is opened   
+wb.setSelectedTab(id);<br>
+Sets which tab will be selected when the WorkBook is opened<br>
 Accepts Sheet ID (1-indexed sheet in order that sheets were added)
 
-wb.createStyle(opts);  
-Creates a new Style instance   
-Accepts Style configuration object (see Style section)
-Returns a new Style instance   
+wb.createStyle(opts);<br>
+Creates a new Style instance<br>
+Accepts Style configuration object (see Style section) Returns a new Style instance
 
-wb.write();   
+wb.write();<br>
 The write() method can accept a single filename, a filename with callback function or an HTTP response object.
 
 ```javascript
@@ -135,14 +140,16 @@ var xl = require('excel4node');
 var wb = new xl.Workbook();
 wb.write('ExcelFile.xlsx'); // Writes the file ExcelFile.xlsx to the process.cwd();
 ```
+
 ```javascript
 wb.write('ExcelFile.xlsx', function (err, stats) {
-	if (err) {
-		console.error(err);
-	} 
-	console.log(stats); // Prints out an instance of a node.js fs.Stats object
+    if (err) {
+        console.error(err);
+    }
+    console.log(stats); // Prints out an instance of a node.js fs.Stats object
 });
 ```
+
 ```javascript
 // sends Excel file to web client requesting the / route
 var express = require('express');
@@ -155,7 +162,7 @@ app.listen(3000, function () {
 });
 ```
 
-wb.writeToBuffer();   
+wb.writeToBuffer();<br>
 The writeToBuffer() method access no parameters and returns a promise that resolves with the nodebuffer generated by the JSZip library. This buffer can then be sent to other streams.
 
 ```javascript
@@ -163,15 +170,16 @@ var xl = require('excel4node');
 var wb = new xl.Workbook();
 
 wb.writeToBuffer().then(function (buffer) {
-	// Do something with buffer
+    // Do something with buffer
 });
 ```
 
-
 ## Worksheet
+
 An instance of the Worksheet class contains all information specific to that worksheet
 
-#### Contstructor
+### Contstructor
+
 Worksheet contructor is called via Workbook class and accepts a name and configuration object
 
 ```javascript
@@ -179,10 +187,10 @@ var xl = require('excel4node');
 var wb = new xl.Workbook();
 
 var options = {
-	margins: {
-		left: 1.5,
-		right: 1.5
-	}
+    margins: {
+        left: 1.5,
+        right: 1.5
+    }
 };
 
 var ws = wb.addWorksheet(options);
@@ -205,7 +213,7 @@ Full Worksheet options. All options are optional.
         'centerVertical': Boolean,
         'printGridLines': Boolean,
         'printHeadings': Boolean
-    
+
     },
     'headerFooter': { // Set Header and Footer strings and options. See note below
         'evenFooter': String,
@@ -240,7 +248,7 @@ Full Worksheet options. All options are optional.
         'verticalDpi': Integer
     },
     'sheetView': {
-        'pane': { // Note. Calling .freeze() on a row or column will adjust these values 
+        'pane': { // Note. Calling .freeze() on a row or column will adjust these values
             'activePane': xl.Pane, // one of 'bottomLeft', 'bottomRight', 'topLeft', 'topRight'
             'state': xl.PaneState, // one of 'split', 'frozen', 'frozenSplit'
             'topLeftCell': Cell Reference, // i.e. 'A1'
@@ -250,16 +258,17 @@ Full Worksheet options. All options are optional.
         'rightToLeft': Boolean, // Flag indicating whether the sheet is in 'right to left' display mode. When in this mode, Column A is on the far right, Column B ;is one column left of Column A, and so on. Also, information in cells is displayed in the Right to Left format.
         'zoomScale': Integer, // Defaults to 100
         'zoomScaleNormal': Integer, // Defaults to 100
-        'zoomScalePageLayoutView': Integer // Defaults to 100
+        'zoomScalePageLayoutView': Integer, // Defaults to 100
+        'showGridLines': Boolean //Defaults to True, False means that sheet not show the grid lines
     },
     'sheetFormat': {
-        'baseColWidth': Integer, // Defaults to 10. Specifies the number of characters of the maximum digit width of the normal style's font. This value does not include margin padding or extra padding for gridlines. It is only the number of characters.,
+        'baseColWidth': Integer, // Defaults to 10\. Specifies the number of characters of the maximum digit width of the normal style's font. This value does not include margin padding or extra padding for gridlines. It is only the number of characters.,
         'defaultColWidth': Integer,
         'defaultRowHeight': Integer,
         'thickBottom': Boolean, // 'True' if rows have a thick bottom border by default.
         'thickTop': Boolean // 'True' if rows have a thick top border by default.
     },
-    'sheetProtection': { // same as "Protect Sheet" in Review tab of Excel 
+    'sheetProtection': { // same as "Protect Sheet" in Review tab of Excel
         'autoFilter': Boolean, // True means that that user will be unable to modify this setting
         'deleteColumns': Boolean,
         'deleteRows': Boolean,
@@ -285,33 +294,33 @@ Full Worksheet options. All options are optional.
 }
 ```
 
-__Note:__ headerFooter strings accept [Dynamic Formatting Strings](https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html). i.e. '&L&A&C&BCompany, Inc. Confidential&B&RPage &P of &N'   
+**Note:** headerFooter strings accept [Dynamic Formatting Strings](https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html). i.e. '&L&A&C&BCompany, Inc. Confidential&B&RPage &P of &N'
 
+### Methods
 
-#### Methods
-##### Worksheet data validations   
-ws.addDataValidation();   
+#### Worksheet data validations
+
+ws.addDataValidation();<br>
 Accepts a validation options object with these available options. All options are optional with exception of sqref.
 
 ```javascript
 {
-	sqref: String, // Required. Specifies range of cells to apply validate. i.e. "A1:A100"
-	allowBlank: Boolean, // Allows cells to be empty
-	errorStyle: String, // One of 'stop', 'warning', 'information'. You must specify an error string for this to take effect
-	error: String, // Message to show on error
-	errorTitle: String, // Title of message shown on error
-	showErrorMessage: Boolean, // Defaults to true if error or errorTitle is set
-	imeMode: String, // Restricts input to a specific set of characters. One of 'noControl', 'off', 'on', 'disabled', 'hiragana', 'fullKatakana', 'halfKatakana', 'fullAlpha', 'halfAlpha', 'fullHangul', 'halfHangul'
-	operator: String, // Must be one of 'between', 'notBetween', 'equal', 'notEqual', 'lessThan', 'lessThanOrEqual', 'greaterThan', 'greaterThanOrEqual'
-	prompt: String, // Message text of input prompt
-	promptTitle: String, // Title of input prompt
-	showInputMessage: Boolean, // Defaults to true if prompt or promptTitle is set
-	showDropDown: Boolean, // A boolean value indicating whether to display a dropdown combo box for a list type data validation. Defaults to true for type:list
-	type: String, // One of 'none', 'whole', 'decimal', 'list', 'date', 'time', 'textLength', 'custom'
-	formulas: Array // Minimum count 1, maximum count 2. 
+    sqref: String, // Required. Specifies range of cells to apply validate. i.e. "A1:A100"
+    allowBlank: Boolean, // Allows cells to be empty
+    errorStyle: String, // One of 'stop', 'warning', 'information'. You must specify an error string for this to take effect
+    error: String, // Message to show on error
+    errorTitle: String, // Title of message shown on error
+    showErrorMessage: Boolean, // Defaults to true if error or errorTitle is set
+    imeMode: String, // Restricts input to a specific set of characters. One of 'noControl', 'off', 'on', 'disabled', 'hiragana', 'fullKatakana', 'halfKatakana', 'fullAlpha', 'halfAlpha', 'fullHangul', 'halfHangul'
+    operator: String, // Must be one of 'between', 'notBetween', 'equal', 'notEqual', 'lessThan', 'lessThanOrEqual', 'greaterThan', 'greaterThanOrEqual'
+    prompt: String, // Message text of input prompt
+    promptTitle: String, // Title of input prompt
+    showInputMessage: Boolean, // Defaults to true if prompt or promptTitle is set
+    showDropDown: Boolean, // A boolean value indicating whether to display a dropdown combo box for a list type data validation. Defaults to true for type:list
+    type: String, // One of 'none', 'whole', 'decimal', 'list', 'date', 'time', 'textLength', 'custom'
+    formulas: Array // Minimum count 1, maximum count 2\.
 }
 ```
-
 
 ```javascript
 ws.addDataValidation({
@@ -344,31 +353,32 @@ ws.addDataValidation({
 });
 ```
 
-##### Worksheet Conditional Formatting
-Conditional formatting adds custom formats in response to cell reference state. A subset of conditional formatting features is currently supported by excel4node.   
-Formatting rules apply at the worksheet level.   
-The following example will highlight all cells between A1 and A10 that contain the string "ok" with bold, green text:   
+#### Worksheet Conditional Formatting
+
+Conditional formatting adds custom formats in response to cell reference state. A subset of conditional formatting features is currently supported by excel4node.<br>
+Formatting rules apply at the worksheet level.<br>
+The following example will highlight all cells between A1 and A10 that contain the string "ok" with bold, green text:
 
 ```javascript
 var wb = new xl.Workbook();
 var ws = wb.addWorksheet('Sheet 1');
 var myStyle = wb.createStyle({
-	font: {
-		bold: true,
-		color: '00FF00'
-	}
+    font: {
+        bold: true,
+        color: '00FF00'
+    }
 });
- 
-ws.addConditionalFormattingRule('A1:A10', {      // apply ws formatting ref 'A1:A10' 
-    type: 'expression',                          // the conditional formatting type 
-    priority: 1,                                 // rule priority order (required) 
-    formula: 'NOT(ISERROR(SEARCH("ok", A1)))',   // formula that returns nonzero or 0 
-    style: myStyle                               // a style object containing styles to apply 
+
+ws.addConditionalFormattingRule('A1:A10', {      // apply ws formatting ref 'A1:A10'
+    type: 'expression',                          // the conditional formatting type
+    priority: 1,                                 // rule priority order (required)
+    formula: 'NOT(ISERROR(SEARCH("ok", A1)))',   // formula that returns nonzero or 0
+    style: myStyle                               // a style object containing styles to apply
 });
 ```
-**The only conditional formatting type that is currently supported is expression.**   
-When the formula returns zero, conditional formatting is NOT displayed. When the formula returns a nonzero value, conditional formatting is displayed.
 
+**The only conditional formatting type that is currently supported is expression.**<br>
+When the formula returns zero, conditional formatting is NOT displayed. When the formula returns a nonzero value, conditional formatting is displayed.
 
 ## Rows and Columns
 
@@ -384,26 +394,23 @@ Set rows and/or columns to create a frozen pane with an optionall scrollTo
 ```javascript
 ws.column(2).freeze(4); // Freezes the first two columns and scrolls the right view to column D
 ws.row(4).freeze(); // Freezes the top four rows
-
 ```
 
-Add Filters to a row
-If not options are given to the filter function, a filter will be added to all columns that contain data. 
-Optionally, if you wish to restrict your filter to a specific range, you can specify start and end rows and columns for that range. The filter row should be included in this range.
+Add Filters to a row If not options are given to the filter function, a filter will be added to all columns that contain data. Optionally, if you wish to restrict your filter to a specific range, you can specify start and end rows and columns for that range. The filter row should be included in this range.
 
 ```javascript
 ws.row(1).filter();
 ws2.row(1).filter({
-	firstRow: 1,
-	firstColumn: 1,
-	lastRow: 20,
-	lastColumn: 5
+    firstRow: 1,
+    firstColumn: 1,
+    lastRow: 20,
+    lastColumn: 5
 })
 ```
 
 Hide a row or column
 
-```javascript 
+```javascript
 ws.row(5).hide();
 ws.column(10).hide();
 ```
@@ -420,20 +427,20 @@ ws.column(4).group(1, true);
 ws.column(5).group(1, true);
 ```
 
-
 ## Cells
-The cell method accesses a single cell or range of cells to manipulate   
-cell method takes two required parameters and 3 optional parameters   
-.string() accepts a String or Array. Sending array allows for multiple font formattings within the same cell.   
-.number(number) accepts a number   
-.formula(formula) accepts an Excel formula   
-.date(date) accepts either a date or a date string   
-.link(url, [displayStr, tooltip]) accepts a URL and optionally a displayStr and hover tooltip   
-.bool(value) accepts a boolean (true or false)   
-.style(object) accepts the same object as when creating a new style.  When applied to a cell that already has style formatting, the original formatting will be kept and updated with the changes sent to the style function.   
+
+The cell method accesses a single cell or range of cells to manipulate<br>
+cell method takes two required parameters and 3 optional parameters<br>
+.string() accepts a String or Array. Sending array allows for multiple font formattings within the same cell.<br>
+.number(number) accepts a number<br>
+.formula(formula) accepts an Excel formula<br>
+.date(date) accepts either a date or a date string<br>
+.link(url, [displayStr, tooltip]) accepts a URL and optionally a displayStr and hover tooltip<br>
+.bool(value) accepts a boolean (true or false)<br>
+.style(object) accepts the same object as when creating a new style. When applied to a cell that already has style formatting, the original formatting will be kept and updated with the changes sent to the style function.
 
 ```javascript
-// ws.cell(startRow, startColumn, [[endRow, endColumn], isMerged]); 
+// ws.cell(startRow, startColumn, [[endRow, endColumn], isMerged]);
 
 ws.cell(1, 1).string('My simple string');
 ws.cell(1, 2).number(5);
@@ -477,13 +484,13 @@ var complexString = [
 ];
 ws.cell(4, 1).string(complexString);
 ws.cell(5, 1).string('another simple string').style({ font: {name: 'Helvetica'} });
-
 ```
 
 ## Styles
-Style objects can be applied to Cells   
-Any combination of style values can be set   
-Creating a preset style is much more efficient than applying styles to individual cells   
+
+Style objects can be applied to Cells<br>
+Any combination of style values can be set<br>
+Creating a preset style is much more efficient than applying styles to individual cells
 
 ```javascript
 /*
@@ -493,7 +500,7 @@ Style Options Object:
         horizontal: ['center', 'centerContinuous', 'distributed', 'fill', 'general', 'justify', 'left', 'right'],
         indent: integer, // Number of spaces to indent = indent value * 3
         justifyLastLine: boolean,
-        readingOrder: ['contextDependent', 'leftToRight', 'rightToLeft'], 
+        readingOrder: ['contextDependent', 'leftToRight', 'rightToLeft'],
         relativeIndent: integer, // number of additional spaces to indent
         shrinkToFit: boolean,
         textRotation: integer, // number of degrees to rotate text counter-clockwise
@@ -555,14 +562,14 @@ Style Options Object:
 var wb = new xl.Workbook();
 var ws = wb.addWorksheet('Sheet 1');
 var myStyle = wb.createStyle({
-	font: {
-		bold: true,
-		underline: true
-	}, 
-	alignment: {
-		wrapText: true,
-		horizontal: 'center'
-	}
+    font: {
+        bold: true,
+        underline: true
+    },
+    alignment: {
+        wrapText: true,
+        horizontal: 'center'
+    }
 });
 
 ws.cell(1, 1).string('my \n multiline\n string').style(myStyle);
@@ -575,27 +582,28 @@ ws.cell(4, 1).date(new Date()).style({ numberFormat: 'yyyy-mm-dd' });
 ```
 
 ## Images
-Adds and image to the worksheet.   
-currently on 'picture' type is supported   
-positioning has 3 types, 'absoluteAnchor', 'oneCellAnchor', 'twoCellAnchor'   
-absoluteAnchor takes two position elements in either EMUs or measurements in cm, mm, or in   
-x:0, y:0 is top left corner of worksheet  
-oneCellAnchor and twoCellAnchor types will take positional objects: 
+
+Adds and image to the worksheet.<br>
+currently on 'picture' type is supported<br>
+positioning has 3 types, 'absoluteAnchor', 'oneCellAnchor', 'twoCellAnchor'<br>
+absoluteAnchor takes two position elements in either EMUs or measurements in cm, mm, or in<br>
+x:0, y:0 is top left corner of worksheet<br>
+oneCellAnchor and twoCellAnchor types will take positional objects:
 
 ```javascript
 {  
-	'col': 1, \\ left side of image will be placed on left edge of this column   
-	'colOff': '.5mm', \\ offset from left edge of column as EMU or measurment in cm, mm or in   
-	'row': 1, \\top of image will be place on the top edge of this row   
-	'rowOff': '.1in' or string \\ offset from top edge or row as EMU or measurement in cm, mm or in   
+    'col': 1, \\ left side of image will be placed on left edge of this column   
+    'colOff': '.5mm', \\ offset from left edge of column as EMU or measurment in cm, mm or in   
+    'row': 1, \\top of image will be place on the top edge of this row   
+    'rowOff': '.1in' or string \\ offset from top edge or row as EMU or measurement in cm, mm or in   
 }
 ```
-position type of oneCellAnchor will take a single "from" position   
-position type of twoCellAnchor will take a "from" and "to" position   
-specifying a twoCellAnchor will automatically adjust the image to fit within the bounds of the two anchors.   
+
+position type of oneCellAnchor will take a single "from" position<br>
+position type of twoCellAnchor will take a "from" and "to" position<br>
+specifying a twoCellAnchor will automatically adjust the image to fit within the bounds of the two anchors.
 
 ```javascript
-
 ws.addImage({
     path: './screenshot2.jpeg',
     type: 'picture',
@@ -615,11 +623,11 @@ ws.addImage({
             col: 1,
             colOff: '0.5in',
             row: 1,
-            rowOff: 0 
+            rowOff: 0
         }
     }
 });
- 
+
 ws.addImage({
     path: './screenshot1.png',
     type: 'picture',
@@ -639,5 +647,4 @@ ws.addImage({
         }
     }
 });
-
 ```
