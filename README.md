@@ -193,7 +193,7 @@ var options = {
     }
 };
 
-var ws = wb.addWorksheet(options);
+var ws = wb.addWorksheet("worksheet name", options);
 ```
 
 Full Worksheet options. All options are optional.
@@ -647,4 +647,5 @@ ws.addImage({
         }
     }
 });
+
 ```
