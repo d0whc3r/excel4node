@@ -5,43 +5,43 @@ const hyperlinks = require('./classes/hyperlink');
 const Picture = require('../drawing/picture.js');
 
 let _addSheetPr = (promiseObj) => {
-	// §18.3.1.82 sheetPr (Sheet Properties)
-	return new Promise((resolve, reject) => {
-		let o = promiseObj.ws.opts;
+    // §18.3.1.82 sheetPr (Sheet Properties)
+    return new Promise((resolve, reject) => {
+        let o = promiseObj.ws.opts;
 
-		// Check if any option that would require the sheetPr element to be added exists
-		if (
-			o.printOptions.fitToHeight !== null ||
-			o.printOptions.fitToWidth !== null ||
-			o.outline.summaryBelow !== null ||
-			o.autoFilter.ref !== null ||
-			o.outline.summaryRight
+        // Check if any option that would require the sheetPr element to be added exists
+        if (
+            o.printOptions.fitToHeight !== null || 
+            o.printOptions.fitToWidth !== null || 
+            o.outline.summaryBelow !== null ||
+            o.autoFilter.ref !== null ||
+            o.outline.summaryRight
 
-		) {
-			let ele = promiseObj.xml.ele('sheetPr');
+        ) {
+            let ele = promiseObj.xml.ele('sheetPr');
 
-			if (o.autoFilter.ref) {
-				ele.att('enableFormatConditionsCalculation', 1);
-				ele.att('filterMode', 1);
-			}
+            if (o.autoFilter.ref) {
+                ele.att('enableFormatConditionsCalculation', 1);
+                ele.att('filterMode', 1);
+            }
 
-			if (o.outline.summaryBelow !== null || o.outline.summaryRight !== null) {
-				let outlineEle = ele.ele('outlinePr');
-				outlineEle.att('applyStyles', 1);
-				o.outline.summaryBelow === true ? outlineEle.att('summaryBelow', 1) : null;
-				o.outline.summaryRight === true ? outlineEle.att('summaryRight', 1) : null;
-				outlineEle.up();
-			}
+            if (o.outline.summaryBelow !== null || o.outline.summaryRight !== null) {
+                let outlineEle = ele.ele('outlinePr');
+                outlineEle.att('applyStyles', 1);
+                o.outline.summaryBelow === true ? outlineEle.att('summaryBelow', 1) : outlineEle.att('summaryBelow', 0);
+                o.outline.summaryRight === true ? outlineEle.att('summaryRight', 1) : outlineEle.att('summaryRight', 0);
+                outlineEle.up();
+            }
 
-			// §18.3.1.65 pageSetUpPr (Page Setup Properties)
-			if (o.pageSetup.fitToHeight !== null || o.pageSetup.fitToWidth !== null) {
-				ele.ele('pageSetUpPr').att('fitToPage', 1).up();
-			}
-			ele.up();
-		}
+            // §18.3.1.65 pageSetUpPr (Page Setup Properties)
+            if (o.pageSetup.fitToHeight !== null || o.pageSetup.fitToWidth !== null) {
+                ele.ele('pageSetUpPr').att('fitToPage', 1).up();
+            }
+            ele.up();
+        }
 
-		resolve(promiseObj);
-	});
+        resolve(promiseObj);
+    });
 };
 
 let _addDimension = (promiseObj) => {
