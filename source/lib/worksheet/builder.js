@@ -367,42 +367,44 @@ let _addPageMargins = (promiseObj) => {
 };
 
 let _addPageSetup = (promiseObj) => {
-	// §18.3.1.63 pageSetup (Page Setup Settings)
-	return new Promise((resolve, reject) => {
+    // §18.3.1.63 pageSetup (Page Setup Settings)
+    return new Promise((resolve, reject) => {
 
-		let addPageSetup = false;
-		let o = promiseObj.ws.opts.pageSetup;
-		Object.keys(o).forEach((k) => {
-			if (o[k] !== null) {
-				addPageSetup = true;
-			}
-		});
+        let addPageSetup = false;
+        let o = promiseObj.ws.opts.pageSetup;
+        Object.keys(o).forEach((k) => {
+            if (o[k] !== null) {
+                addPageSetup = true;
+            }
+        });
 
-		if (addPageSetup === true) {
-			let psEle = promiseObj.xml.ele('pageSetup');
-			o.paperSize !== null ? psEle.att('paperSize', types.paperSize[o.paperSize]) : null;
-			o.paperHeight !== null ? psEle.att('paperHeight', o.paperHeight) : null;
-			o.paperWidth !== null ? psEle.att('paperWidth', o.paperWidth) : null;
-			o.scale !== null ? psEle.att('scale', o.scale) : null;
-			o.firstPageNumber !== null ? psEle.att('firstPageNumber', o.firstPageNumber) : null;
-			o.fitToWidth !== null ? psEle.att('fitToWidth', o.fitToWidth) : null;
-			o.fitToHeight !== null ? psEle.att('fitToHeight', o.fitToHeight) : null;
-			o.pageOrder !== null ? psEle.att('pageOrder', o.pageOrder) : null;
-			o.orientation !== null ? psEle.att('orientation', o.orientation) : null;
-			o.usePrinterDefaults !== null ? psEle.att('usePrinterDefaults', utils.boolToInt(o.usePrinterDefaults)) : null;
-			o.blackAndWhite !== null ? psEle.att('blackAndWhite', utils.boolToInt(o.blackAndWhite)) : null;
-			o.draft !== null ? psEle.att('draft', utils.boolToInt(o.draft)) : null;
-			o.cellComments !== null ? psEle.att('cellComments', o.cellComments) : null;
-			o.useFirstPageNumber !== null ? psEle.att('useFirstPageNumber', utils.boolToInt(o.useFirstPageNumber)) : null;
-			o.errors !== null ? psEle.att('errors', o.errors) : null;
-			o.horizontalDpi !== null ? psEle.att('horizontalDpi', o.horizontalDpi) : null;
-			o.verticalDpi !== null ? psEle.att('verticalDpi', o.verticalDpi) : null;
-			o.copies !== null ? psEle.att('copies', o.copies) : null;
-			psEle.up();
-		}
+        if (addPageSetup === true) {
+            let psEle = promiseObj.xml.ele('pageSetup');
+            o.paperSize !== null ? psEle.att('paperSize', types.paperSize[o.paperSize]) : null;
+            o.paperHeight !== null ? psEle.att('paperHeight', o.paperHeight) : null;
+            o.paperWidth !== null ? psEle.att('paperWidth', o.paperWidth) : null;
+            o.scale !== null ? psEle.att('scale', o.scale) : null;
+            o.firstPageNumber !== null ? psEle.att('firstPageNumber', o.firstPageNumber) : null;
+            o.fitToWidth !== null ? psEle.att('fitToWidth', o.fitToWidth) : null;
+            o.fitToHeight !== null ? psEle.att('fitToHeight', o.fitToHeight) : null;
+            o.pageOrder !== null ? psEle.att('pageOrder', o.pageOrder) : null;
+            o.orientation !== null ? psEle.att('orientation', o.orientation) : null;
+            o.usePrinterDefaults !== null ? psEle.att('usePrinterDefaults', utils.boolToInt(o.usePrinterDefaults)) : null;
+            o.blackAndWhite !== null ? psEle.att('blackAndWhite', utils.boolToInt(o.blackAndWhite)) : null;
+            o.draft !== null ? psEle.att('draft', utils.boolToInt(o.draft)) : null;
+            o.cellComments !== null ? psEle.att('cellComments', o.cellComments) : null;
+            o.useFirstPageNumber !== null ? psEle.att('useFirstPageNumber', utils.boolToInt(o.useFirstPageNumber)) : null;
+            o.errors !== null ? psEle.att('errors', o.errors) : null;
+            o.horizontalDpi !== null ? psEle.att('horizontalDpi', o.horizontalDpi) : null;
+            o.verticalDpi !== null ? psEle.att('verticalDpi', o.verticalDpi) : null;
+            o.copies !== null ? psEle.att('copies', o.copies) : null;
+            o.printTitleColumns !== null ? psEle.att('printTitleColumns', o.printTitleColumns) : null;
+            o.printTitleRows !== null ? psEle.att('printTitleRows', o.printTitleRows) : null;
+            psEle.up();
+        }
 
-		resolve(promiseObj);
-	});
+        resolve(promiseObj);
+    });
 };
 
 let _addHeaderFooter = (promiseObj) => {

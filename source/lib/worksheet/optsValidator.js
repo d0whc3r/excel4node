@@ -1,110 +1,112 @@
 const types = require('../types/index.js');
 
 const optsTypes = {
-	'margins': {
-		'bottom': 'Float',
-		'footer': 'Float',
-		'header': 'Float',
-		'left': 'Float',
-		'right': 'Float',
-		'top': 'Float'
-	},
-	'printOptions': {
-		'centerHorizontal': 'Boolean',
-		'centerVertical': 'Boolean',
-		'printGridLines': 'Boolean',
-		'printHeadings': 'Boolean'
-
-	},
-	'pageSetup': {
-		'blackAndWhite': 'Boolean',
-		'cellComments': 'CELL_COMMENTS',
-		'copies': 'Integer',
-		'draft': 'Boolean',
-		'errors': 'PRINT_ERROR',
-		'firstPageNumber': 'Boolean',
-		'fitToHeight': 'Integer',
-		'fitToWidth': 'Integer',
-		'horizontalDpi': 'Integer',
-		'orientation': 'ORIENTATION',
-		'pageOrder': 'PAGE_ORDER',
-		'paperHeight': 'POSITIVE_UNIVERSAL_MEASURE',
-		'paperSize': 'PAPER_SIZE',
-		'paperWidth': 'POSITIVE_UNIVERSAL_MEASURE',
-		'scale': 'Integer',
-		'useFirstPageNumber': 'Boolean',
-		'usePrinterDefaults': 'Boolean',
-		'verticalDpi': 'Integer'
-	},
-	'headerFooter': {
-		'evenFooter': 'String',
-		'evenHeader': 'String',
-		'firstFooter': 'String',
-		'firstHeader': 'String',
-		'oddFooter': 'String',
-		'oddHeader': 'String',
-		'alignWithMargins': 'Boolean',
-		'differentFirst': 'Boolean',
-		'differentOddEven': 'Boolean',
-		'scaleWithDoc': 'Boolean'
-	},
-	'sheetView': {
-		'pane': {
-			'activePane': 'PANE',
-			'state': 'PANE_STATE',
-			'topLeftCell': null,
-			'xSplit': null,
-			'ySplit': null
-		},
-		'tabSelected': null,
-		'workbookViewId': null,
-		'rightToLeft': null,
-		'zoomScale': null,
-		'zoomScaleNormal': null,
+    'margins': {
+        'bottom': 'Float',
+        'footer': 'Float',
+        'header': 'Float',
+        'left': 'Float',
+        'right': 'Float',
+        'top': 'Float'
+    },
+    'printOptions': {
+        'centerHorizontal': 'Boolean',
+        'centerVertical': 'Boolean',
+        'printGridLines': 'Boolean',
+        'printHeadings': 'Boolean'
+    
+    },
+    'pageSetup': {
+        'blackAndWhite': 'Boolean',
+        'cellComments': 'CELL_COMMENTS',
+        'copies': 'Integer',
+        'draft': 'Boolean',
+        'errors': 'PRINT_ERROR',
+        'firstPageNumber': 'Boolean',
+        'fitToHeight': 'Integer',
+        'fitToWidth': 'Integer',
+        'horizontalDpi': 'Integer',
+        'orientation': 'ORIENTATION',
+        'pageOrder': 'PAGE_ORDER',
+        'paperHeight': 'POSITIVE_UNIVERSAL_MEASURE',
+        'paperSize': 'PAPER_SIZE',
+        'paperWidth': 'POSITIVE_UNIVERSAL_MEASURE',
+        'scale': 'Integer',
+        'useFirstPageNumber': 'Boolean',
+        'usePrinterDefaults': 'Boolean',
+        'verticalDpi': 'Integer',
+        'printTitleColumns': 'String',
+        'printTitleRows': 'String'
+    },
+    'headerFooter': {
+        'evenFooter': 'String',
+        'evenHeader': 'String',
+        'firstFooter': 'String',
+        'firstHeader': 'String',
+        'oddFooter': 'String',
+        'oddHeader': 'String',
+        'alignWithMargins': 'Boolean',
+        'differentFirst': 'Boolean',
+        'differentOddEven': 'Boolean',
+        'scaleWithDoc': 'Boolean'
+    },
+    'sheetView': {
+        'pane': {
+            'activePane': 'PANE',
+            'state': 'PANE_STATE',
+            'topLeftCell': null,
+            'xSplit': null,
+            'ySplit': null
+        },
+        'tabSelected': null,
+        'workbookViewId': null,
+        'rightToLeft': null,
+        'zoomScale': null,
+        'zoomScaleNormal': null,
 		'zoomScalePageLayoutView': null,
 		'showGridLines': null
-	},
-	'sheetFormat': {
-		'baseColWidth': null,
-		'customHeight': null,
-		'defaultColWidth': null,
-		'defaultRowHeight': null,
-		'outlineLevelCol': null,
-		'outlineLevelRow': null,
-		'thickBottom': null,
-		'thickTop': null,
-		'zeroHeight': null
-	},
-	'sheetProtection': {
-		'autoFilter': null,
-		'deleteColumns': null,
-		'deleteRow': null,
-		'formatCells': null,
-		'formatColumns': null,
-		'formatRows': null,
-		'hashValue': null,
-		'insertColumns': null,
-		'insertHyperlinks': null,
-		'insertRows': null,
-		'objects': null,
-		'password': null,
-		'pivotTables': null,
-		'scenarios': null,
-		'selectLockedCells': null,
-		'selectUnlockedCell': null,
-		'sheet': null,
-		'sort': null
-	},
-	'outline': {
-		'summaryBelow': null
-	},
-	'autoFilter': {
-		'startRow': null,
-		'endRow': null,
-		'startCol': null,
-		'endCol': null,
-		'filters': null
-	}
+    },
+    'sheetFormat': {
+        'baseColWidth': null,
+        'customHeight': null,
+        'defaultColWidth': null,
+        'defaultRowHeight': null,
+        'outlineLevelCol': null,
+        'outlineLevelRow': null,
+        'thickBottom': null,
+        'thickTop': null,
+        'zeroHeight': null
+    },
+    'sheetProtection': {
+        'autoFilter': null,
+        'deleteColumns': null,
+        'deleteRow': null,
+        'formatCells': null,
+        'formatColumns': null,
+        'formatRows': null,
+        'hashValue': null,
+        'insertColumns': null,
+        'insertHyperlinks': null,
+        'insertRows': null,
+        'objects': null,
+        'password': null,
+        'pivotTables': null,
+        'scenarios': null,
+        'selectLockedCells': null,
+        'selectUnlockedCell': null,
+        'sheet': null,
+        'sort': null
+    },
+    'outline': {
+        'summaryBelow': null
+    },
+    'autoFilter': {
+        'startRow': null,
+        'endRow': null,
+        'startCol': null,
+        'endCol': null,
+        'filters': null
+    }
 };
 
 let getObjItem = (obj, key) => {
@@ -206,5 +208,5 @@ let traverse = function (o, keyParts, func) {
 };
 
 module.exports = (opts) => {
-	traverse(opts, [], validator);
+    traverse(opts, [], validator);
 };
