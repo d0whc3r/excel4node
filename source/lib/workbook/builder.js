@@ -4,53 +4,54 @@ const fs = require('fs');
 const CTColor = require('../style/classes/ctColor.js');
 
 let addRootContentTypesXML = (promiseObj) => {
-	// Required as stated in §12.2
-	return new Promise((resolve, reject) => {
-		let xml = xmlbuilder.create(
-				'Types', {
-					'version': '1.0',
-					'encoding': 'UTF-8',
-					'standalone': true
-				}
-			)
-			.att('xmlns', 'http://schemas.openxmlformats.org/package/2006/content-types');
+    // Required as stated in §12.2
+    return new Promise ((resolve, reject) => {
+        let xml = xmlbuilder.create(
+            'Types',
+            {
+                'version': '1.0', 
+                'encoding': 'UTF-8', 
+                'standalone': true
+            }
+        )
+        .att('xmlns', 'http://schemas.openxmlformats.org/package/2006/content-types');
 
-		let contentTypesAdded = [];
-		promiseObj.wb.sheets.forEach((s, i) => {
-			if (s.drawingCollection.length > 0) {
-				let extensionsAdded = [];
-				s.drawingCollection.drawings.forEach((d) => {
-					if (extensionsAdded.indexOf(d.extension) < 0) {
-						let typeRef = d.contentType + '.' + d.extension;
-						if (contentTypesAdded.indexOf(typeRef) < 0) {
-							xml.ele('Default').att('ContentType', d.contentType).att('Extension', d.extension);
-						}
-						extensionsAdded.push(d.extension);
-					}
-				});
-			}
-		});
-		xml.ele('Default').att('ContentType', 'application/xml').att('Extension', 'xml');
-		xml.ele('Default').att('ContentType', 'application/vnd.openxmlformats-package.relationships+xml').att('Extension', 'rels');
-		xml.ele('Override').att('ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml').att('PartName', '/xl/workbook.xml');
-		promiseObj.wb.sheets.forEach((s, i) => {
-			xml.ele('Override')
-				.att('ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml')
-				.att('PartName', `/xl/worksheets/sheet${i + 1}.xml`);
+        let contentTypesAdded = []; 
+        let extensionsAdded = [];
+        promiseObj.wb.sheets.forEach((s, i) => {
+            if (s.drawingCollection.length > 0) {
+                s.drawingCollection.drawings.forEach((d) => {
+                    if (extensionsAdded.indexOf(d.extension) < 0) {
+                        let typeRef = d.contentType + '.' + d.extension;
+                        if (contentTypesAdded.indexOf(typeRef) < 0) {
+                            xml.ele('Default').att('ContentType', d.contentType).att('Extension', d.extension);
+                        }
+                        extensionsAdded.push(d.extension);
+                    }
+                });
+            }
+        });
+        xml.ele('Default').att('ContentType', 'application/xml').att('Extension', 'xml');
+        xml.ele('Default').att('ContentType', 'application/vnd.openxmlformats-package.relationships+xml').att('Extension', 'rels');
+        xml.ele('Override').att('ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml').att('PartName', '/xl/workbook.xml');
+        promiseObj.wb.sheets.forEach((s, i) => {
+            xml.ele('Override')
+            .att('ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml')
+            .att('PartName', `/xl/worksheets/sheet${i + 1}.xml`);
 
-			if (s.drawingCollection.length > 0) {
-				xml.ele('Override')
-					.att('ContentType', 'application/vnd.openxmlformats-officedocument.drawing+xml')
-					.att('PartName', '/xl/drawings/drawing' + s.sheetId + '.xml');
-			}
-		});
-		xml.ele('Override').att('ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml').att('PartName', '/xl/styles.xml');
-		xml.ele('Override').att('ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml').att('PartName', '/xl/sharedStrings.xml');
+            if (s.drawingCollection.length > 0) {              
+                xml.ele('Override')
+                .att('ContentType', 'application/vnd.openxmlformats-officedocument.drawing+xml')
+                .att('PartName', '/xl/drawings/drawing' + s.sheetId + '.xml');  
+            }
+        });
+        xml.ele('Override').att('ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml').att('PartName', '/xl/styles.xml');
+        xml.ele('Override').att('ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml').att('PartName', '/xl/sharedStrings.xml');
 
-		let xmlString = xml.doc().end(promiseObj.xmlOutVars);
-		promiseObj.xlsx.file('[Content_Types].xml', xmlString);
-		resolve(promiseObj);
-	});
+        let xmlString = xml.doc().end(promiseObj.xmlOutVars);
+        promiseObj.xlsx.file('[Content_Types].xml', xmlString);
+        resolve(promiseObj);
+    });
 };
 
 let addRootRelsXML = (promiseObj) => {
